@@ -1,4 +1,4 @@
-import { createGlobalStyle} from "styled-components"
+import { createGlobalStyle } from "styled-components"
 export const GlobalStyles = createGlobalStyle`
     body {
         transition: all 1.0s ease;
