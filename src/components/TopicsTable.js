@@ -1,8 +1,8 @@
 import { StyledTh, StyledTr } from "./StyledComponents"
 
-export const TopicsTable = ({ data, rowClickHandler }) => {
+export const TopicsTable = ({ relatedTopics, onTopicChange }) => {
     return <div>
-        <table className = "table table-hover">
+        <table className="table table-hover">
             <StyledTh>
                 <tr>
                     <th>Name</th>
@@ -10,15 +10,25 @@ export const TopicsTable = ({ data, rowClickHandler }) => {
                 </tr>
             </StyledTh>
             <tbody>
-                {data ? data.map(obj => {
-                    return <StyledTr key = {Math.random()} onClick = {() => rowClickHandler(obj)}>
-                            <td> {obj.name} </td>
-                            <td> {obj.stargazers.totalCount} </td>
-                        </StyledTr>
-                    }):<div><h1>No data found</h1></div>
+                {(relatedTopics && relatedTopics.length) ? relatedTopics.map((relatedTopic, index) => {
+                    return <TopicsRow onTopicChange={onTopicChange} key={index} relatedTopic={relatedTopic} />
+                }) : <NoTopics />
                 }
 
             </tbody>
         </table>
     </div>
+}
+
+
+export const TopicsRow = ({ relatedTopic, onTopicChange }) => {
+    return <StyledTr onClick={() => onTopicChange(relatedTopic)}>
+        <td> {relatedTopic.name} </td>
+        <td> {relatedTopic.stargazers.totalCount} </td>
+    </StyledTr>
+}
+
+
+const NoTopics = () => {
+    return <div><h1>No data found</h1></div>
 }
