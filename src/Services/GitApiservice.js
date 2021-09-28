@@ -15,5 +15,5 @@ export const prepareQuery = (name) => {
     `
 }
 
-export const useGetData = (topic) => useQuery(prepareQuery(topic))
+export const getRelatedTopics = (topic) => useQuery(prepareQuery(topic))
 
